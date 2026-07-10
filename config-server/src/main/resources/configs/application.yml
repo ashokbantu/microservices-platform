@@ -1,0 +1,30 @@
+# Shared configuration for all microservices
+jwt:
+  secret: ${JWT_SECRET:your-super-secret-jwt-key-minimum-256-bits-long}
+  expiration: 86400000
+  refresh-expiration: 604800000
+
+spring:
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password: ${REDIS_PASSWORD:redispass}
+      lettuce:
+        pool:
+          max-active: 10
+          max-idle: 5
+          min-idle: 2
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    export:
+      prometheus:
+        enabled: true
